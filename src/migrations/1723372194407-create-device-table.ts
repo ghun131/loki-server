@@ -1,3 +1,5 @@
+// Updated migration file: src/migrations/1723372194407-CreateDeviceTable.ts
+
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export class CreateDeviceTable1723372194407 implements MigrationInterface {
@@ -8,10 +10,9 @@ export class CreateDeviceTable1723372194407 implements MigrationInterface {
         columns: [
           {
             name: 'id',
-            type: 'int',
+            type: 'uuid',
             isPrimary: true,
-            isGenerated: true,
-            generationStrategy: 'increment',
+            default: 'uuid_generate_v4()',
           },
           {
             name: 'name',
@@ -35,9 +36,13 @@ export class CreateDeviceTable1723372194407 implements MigrationInterface {
       }),
       true,
     );
+
+    // Enable uuid-ossp extension for UUID generation
+    await queryRunner.query(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`);
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable('devices');
+    await queryRunner.query(`DROP EXTENSION IF EXISTS "uuid-ossp"`);
   }
 }
