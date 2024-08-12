@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "loki_api_document",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

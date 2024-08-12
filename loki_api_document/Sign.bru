@@ -1,0 +1,27 @@
+meta {
+  name: Sign
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{host}}:{{port}}/api/v1/sign
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "id": "b0f74049-d192-417e-8e5e-bdda67eba4b0",
+    "name": "Test Device",
+    "timestamp": "2024-08-11T18:30:00Z",
+    "data": {
+      "temperature": 22.5,
+      "humidity": 45
+    }
+  }
+}
